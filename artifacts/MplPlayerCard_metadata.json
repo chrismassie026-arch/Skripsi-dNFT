@@ -130,13 +130,45 @@
 				"type": "error"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "provided",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minimum",
+						"type": "uint256"
+					}
+				],
+				"name": "IntervalTooShort",
+				"type": "error"
+			},
+			{
 				"inputs": [],
 				"name": "NoInlineSecrets",
 				"type": "error"
 			},
 			{
 				"inputs": [],
+				"name": "NoTokensMinted",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "OnlyRouterCanFulfill",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "err",
+						"type": "bytes"
+					}
+				],
+				"name": "OracleError",
 				"type": "error"
 			},
 			{
@@ -159,6 +191,17 @@
 					}
 				],
 				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "requestId",
+						"type": "bytes32"
+					}
+				],
+				"name": "UnknownRequestId",
 				"type": "error"
 			},
 			{
@@ -217,6 +260,25 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
+						"name": "newInterval",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "newTargetTokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "AutomationSettingsChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
 						"name": "_fromTokenId",
 						"type": "uint256"
 					},
@@ -267,6 +329,55 @@
 				"inputs": [
 					{
 						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "games",
+						"type": "uint64"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "kills",
+						"type": "uint64"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "deaths",
+						"type": "uint64"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint64",
+						"name": "assists",
+						"type": "uint64"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "tierIndex",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "PlayerStatsUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
 						"internalType": "bytes32",
 						"name": "id",
 						"type": "bytes32"
@@ -293,6 +404,31 @@
 				"inputs": [
 					{
 						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "requestId",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "nickname",
+						"type": "string"
+					}
+				],
+				"name": "StatsRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
 						"internalType": "address",
 						"name": "from",
 						"type": "address"
@@ -312,6 +448,19 @@
 				],
 				"name": "Transfer",
 				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "MINIMUM_INTERVAL",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -407,6 +556,81 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getPlayerData",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "nickname",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lane",
+								"type": "string"
+							},
+							{
+								"internalType": "uint64",
+								"name": "games",
+								"type": "uint64"
+							},
+							{
+								"internalType": "uint64",
+								"name": "kills",
+								"type": "uint64"
+							},
+							{
+								"internalType": "uint64",
+								"name": "deaths",
+								"type": "uint64"
+							},
+							{
+								"internalType": "uint64",
+								"name": "assists",
+								"type": "uint64"
+							}
+						],
+						"internalType": "struct MplPlayerCard.PlayerData",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getTokenTier",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "tierIndex",
+						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "tierName",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -554,6 +778,19 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "requestStatsUpdate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
@@ -562,7 +799,7 @@
 				"outputs": [
 					{
 						"internalType": "string",
-						"name": "name",
+						"name": "nickname",
 						"type": "string"
 					},
 					{
@@ -602,6 +839,25 @@
 						"type": "bytes32"
 					}
 				],
+				"name": "s_requestExists",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
 				"name": "s_requestToTokenId",
 				"outputs": [
 					{
@@ -622,7 +878,7 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_name",
+						"name": "_nickname",
 						"type": "string"
 					},
 					{
@@ -821,6 +1077,19 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -1033,7 +1302,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"dNFT/PlayerCard_B.sol": "MplPlayerCard"
+			"TA/PlayerCard_A.sol": "MplPlayerCard"
 		},
 		"evmVersion": "osaka",
 		"libraries": {},
@@ -1044,7 +1313,8 @@
 			"enabled": true,
 			"runs": 200
 		},
-		"remappings": []
+		"remappings": [],
+		"viaIR": true
 	},
 	"sources": {
 		"@chainlink/contracts/src/v0.8/functions/v1_0_0/FunctionsClient.sol": {
@@ -1271,12 +1541,12 @@
 				"dweb:/ipfs/QmVUSvooZKEdEdap619tcJjTLcAuH6QBdZqAzWwnAXZAWJ"
 			]
 		},
-		"dNFT/PlayerCard_B.sol": {
-			"keccak256": "0x5d7d53ffe9151d9531bf3bf74c859ab108be475c6aaa8690fc2348dd26dfd2b5",
+		"TA/PlayerCard_A.sol": {
+			"keccak256": "0x4300851d2bf235f00c580c2b4535325bbf94b25312db43b36cde92bc5efd4fec",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e7e881e0fc6cdef541a1820c8c2c68ddd880e5a10e385851221456a256b7aa52",
-				"dweb:/ipfs/QmQ8YPmLLZnJP7UZBEADTBk1mP5eFRqy7rYudN2mTNBpo9"
+				"bzz-raw://8fcdc0835b5f29f9d98b2cfd2ef911cf0f9443542abe629dad176b435835eba2",
+				"dweb:/ipfs/QmQNi1UTSqPPFFX8HTmDM5rmqRRRXUffopeHXkcH5TmCwe"
 			]
 		}
 	},
