@@ -1,4 +1,6 @@
 # Abaikan folder hasil kompilasi Remix
 artifacts/
+.deploys/
 .deps/
 .states/
+remix.config.json
